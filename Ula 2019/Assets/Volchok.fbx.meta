@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 26145f224031fc748b2e781e044fac14
+timeCreated: 1475787030
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Camera_Target_1
+    100004: Cylinder
+    100006: Cylinder_1
+    100008: Cylinder_2
+    100010: Cylinder_3
+    100012: Cylinder_4
+    100014: Cylinder_5
+    100016: Floor
+    100018: Glass
+    100020: Glass_TUMB_2
+    100022: Light
+    100024: Light_1
+    100026: Light_2
+    100028: Light_Target_1
+    100030: Marbl
+    100032: Marbl_TUMB_5
+    100034: Metal
+    100036: Metal_TUMB_3
+    100038: Plane
+    100040: Plastic
+    100042: Plastic_TUMB_4
+    100044: Sky
+    100046: //RootNode
+    100048: Wood
+    100050: wood_TUMB_1
+    400000: Camera
+    400002: Camera_Target_1
+    400004: Cylinder
+    400006: Cylinder_1
+    400008: Cylinder_2
+    400010: Cylinder_3
+    400012: Cylinder_4
+    400014: Cylinder_5
+    400016: Floor
+    400018: Glass
+    400020: Glass_TUMB_2
+    400022: Light
+    400024: Light_1
+    400026: Light_2
+    400028: Light_Target_1
+    400030: Marbl
+    400032: Marbl_TUMB_5
+    400034: Metal
+    400036: Metal_TUMB_3
+    400038: Plane
+    400040: Plastic
+    400042: Plastic_TUMB_4
+    400044: Sky
+    400046: //RootNode
+    400048: Wood
+    400050: wood_TUMB_1
+    2300000: Cylinder
+    2300002: Cylinder_2
+    2300004: Cylinder_3
+    2300006: Cylinder_4
+    2300008: Cylinder_5
+    2300010: Glass_TUMB_2
+    2300012: Marbl_TUMB_5
+    2300014: Metal_TUMB_3
+    2300016: Plastic_TUMB_4
+    2300018: wood_TUMB_1
+    3300000: Cylinder
+    3300002: Cylinder_2
+    3300004: Cylinder_3
+    3300006: Cylinder_4
+    3300008: Cylinder_5
+    3300010: Glass_TUMB_2
+    3300012: Marbl_TUMB_5
+    3300014: Metal_TUMB_3
+    3300016: Plastic_TUMB_4
+    3300018: wood_TUMB_1
+    4300000: Cylinder
+    4300002: Cylinder_2
+    4300004: Cylinder_3
+    4300006: Cylinder_4
+    4300008: Cylinder_5
+    4300010: Marbl_TUMB_5
+    4300012: Plastic_TUMB_4
+    4300014: Metal_TUMB_3
+    4300016: Glass_TUMB_2
+    4300018: wood_TUMB_1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

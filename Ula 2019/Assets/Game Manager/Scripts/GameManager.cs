@@ -1,19 +1,30 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    // keep track of the game state
+    public enum GameState
+    {
+        PREGAME,
+        RUNNING,
+        PAUSED
+    }
 
     public GameObject[] SystemPrefabs;
+    public Events.EventGameState OnGameStateChanged;
 
-    private List<GameObject> _instancedSystemPrefabs;
-    private string _currentLevelName = string.Empty;
-
+    List<GameObject> _instancedSystemPrefabs;
     List<AsyncOperation> _loadOperations;
+    GameState _currentGameState = GameState.PREGAME;
+
+    string _currentLevelName = string.Empty;
+
+    public GameState CurentGameState
+    {
+        get {return _currentGameState;}
+        private set {_currentGameState = value;}
+    }
 
     private void Start()
     {
@@ -24,7 +35,20 @@ public class GameManager : Singleton<GameManager>
 
         InstantiateSystemPrefabs();
 
-        LoadLevel("Main");
+        UIManger.Instance.OnMainMenuFadeComplete.AddListener(HandleMainMenuFadeComplete);
+    }
+
+    private void Update()
+    {
+        if (_currentGameState == GameState.PREGAME)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TouglePause();
+        }
     }
 
     private void OnLoadOperationComlete(AsyncOperation ao)
@@ -33,8 +57,10 @@ public class GameManager : Singleton<GameManager>
         {
             _loadOperations.Remove(ao);
 
-            // dispath message
-            // transition between scenes
+            if (_loadOperations.Count == 0)
+            {
+                UpdateState(GameState.RUNNING);
+            }
         }
 
         Debug.Log("Load Complete");
@@ -43,6 +69,42 @@ public class GameManager : Singleton<GameManager>
     private void OnUnloadOperationComlete(AsyncOperation ao)
     {
         Debug.Log("Unload Complete");
+    }
+
+    void HandleMainMenuFadeComplete(bool fadeOut)
+    {
+        if (!fadeOut)
+        {
+            UnloadLevel(_currentLevelName);
+        }
+    }
+
+    void UpdateState(GameState state)
+    {
+        GameState priviousGameState = _currentGameState;
+        _currentGameState = state;
+
+        switch(_currentGameState)
+        {
+            case GameState.PREGAME:
+                Time.timeScale = 1.0f;
+                break;
+
+            case GameState.RUNNING:
+                Time.timeScale = 1.0f;
+                break;
+
+            case GameState.PAUSED:
+                Time.timeScale = 0.0f;
+                break;
+
+            default:
+                break;
+        }
+
+        OnGameStateChanged.Invoke(_currentGameState, priviousGameState);
+        // transition between scenes
+
     }
 
     void InstantiateSystemPrefabs()
@@ -89,6 +151,28 @@ public class GameManager : Singleton<GameManager>
             Destroy(_instancedSystemPrefabs[i]);
         }
         _instancedSystemPrefabs.Clear();
+    }
+
+    public void StartGame()
+    {
+        LoadLevel("Game");
+    }
+
+    public void TouglePause()
+    {
+        UpdateState(_currentGameState == GameState.RUNNING ? GameState.PAUSED : GameState.RUNNING);
+    }
+
+    public void RestartGame()
+    {
+        UpdateState(GameState.PREGAME);
+    }
+
+    public void QuitGame()
+    {
+        // implement features for quitting
+
+        Application.Quit();
     }
 
 }
