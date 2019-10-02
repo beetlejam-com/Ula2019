@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.SocialPlatforms;
 
 
+
 public class MainMenu : MonoBehaviour
 {
     public Transform prefab;
@@ -52,10 +53,20 @@ public class MainMenu : MonoBehaviour
         int countX = 0;
         int countY = levelsInColumn-1;
 
-        Social.LoadScores("leaderboard_level_1", scores => {
+        Social.localUser.Authenticate(authenticated =>
+        {
+            if (!authenticated || !Social.localUser.authenticated)
+            {
+                Debug.Log("fail");
+            }
+            Debug.Log("success");
+            Social.LoadScores("leaderboard_level_1", scores => {
 
-            Debug.Log(scores);
+                Debug.Log(scores);
+            });
         });
+
+        
 
         for (int i = 0; i < levelsAmount; i++)
         {
