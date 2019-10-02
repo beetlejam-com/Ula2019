@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManger : Singleton<UIManger>
 {
-    [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private GameMenu _mainMenu;
     [SerializeField] private PauseMenu _pauseMenu;
 
     [SerializeField] private Camera _dummyCamera;
