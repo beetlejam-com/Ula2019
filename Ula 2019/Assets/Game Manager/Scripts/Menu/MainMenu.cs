@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+using UnityEngine.SocialPlatforms;
+
+
 public class MainMenu : MonoBehaviour
 {
     public Transform prefab;
@@ -48,6 +51,12 @@ public class MainMenu : MonoBehaviour
     {
         int countX = 0;
         int countY = levelsInColumn-1;
+
+        Social.LoadScores("leaderboard_level_1", scores => {
+
+            Debug.Log(scores);
+        });
+
         for (int i = 0; i < levelsAmount; i++)
         {
             Transform LevelButton;
