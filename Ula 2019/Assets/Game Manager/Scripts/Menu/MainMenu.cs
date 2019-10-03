@@ -59,7 +59,8 @@ public class MainMenu : MonoBehaviour
             {
                 Debug.Log("fail");
             }
-            Debug.Log("success");
+            Debug.Log(Social.localUser);
+            Debug.Log(authenticated);
             Social.LoadScores("leaderboard_level_1", scores => {
 
                 Debug.Log(scores);
