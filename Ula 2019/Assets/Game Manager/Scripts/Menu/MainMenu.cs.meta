@@ -3,7 +3,10 @@ guid: 7f0206865da4c644d8736fa199eae269
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - prefab: {instanceID: 0}
+  - LevelButton: {fileID: 1744506253358844414, guid: 7eb23611e9ddb90468eea2843ae0a7e7,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

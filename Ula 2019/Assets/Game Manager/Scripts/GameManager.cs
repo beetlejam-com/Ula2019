@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     public enum GameState
     {
         PREGAME,
+        MENU,
         RUNNING,
         PAUSED
     }
@@ -40,12 +41,12 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (_currentGameState == GameState.PREGAME)
+        if (_currentGameState == GameState.PREGAME || _currentGameState == GameState.MENU)
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (_currentGameState == GameState.RUNNING && Input.GetKeyDown(KeyCode.Escape))
         {
             TouglePause();
         }
@@ -59,7 +60,14 @@ public class GameManager : Singleton<GameManager>
 
             if (_loadOperations.Count == 0)
             {
-                UpdateState(GameState.RUNNING);
+                if (_currentLevelName == "MainMenu")
+                    UpdateState(GameState.MENU);
+                else if (_currentLevelName == "Game")
+                {
+                    UIManger.Instance.SetDummyCameraActive(false);
+                    UpdateState(GameState.RUNNING);
+                }
+                    
             }
         }
 
@@ -87,6 +95,10 @@ public class GameManager : Singleton<GameManager>
         switch(_currentGameState)
         {
             case GameState.PREGAME:
+                Time.timeScale = 1.0f;
+                break;
+
+            case GameState.MENU:
                 Time.timeScale = 1.0f;
                 break;
 
@@ -155,6 +167,12 @@ public class GameManager : Singleton<GameManager>
 
     public void StartGame()
     {
+        LoadLevel("MainMenu");
+    }
+
+    public void StartLevel()
+    {
+        UnloadLevel("MainMenu");
         LoadLevel("Game");
     }
 
@@ -165,7 +183,8 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
-        UpdateState(GameState.PREGAME);
+        UnloadLevel("Game");
+        LoadLevel("MainMenu");
     }
 
     public void QuitGame()

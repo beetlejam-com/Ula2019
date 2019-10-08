@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+using UnityEngine.UI;
 using UnityEngine.SocialPlatforms;
 
 
 
 public class MainMenu : MonoBehaviour
 {
-    public Transform prefab;
+    [SerializeField] private Transform LevelButton;
+
     private float mainUnitWidth;
     private float mainUnitHeight;
     private float prefabWidth;
@@ -34,8 +33,8 @@ public class MainMenu : MonoBehaviour
 
         mainUnitWidth = GetComponent<RectTransform>().rect.width;
         mainUnitHeight = GetComponent<RectTransform>().rect.height;
-        prefabWidth = prefab.GetComponent<RectTransform>().rect.width + marginLeft + marginRight;
-        prefabHeight = prefab.GetComponent<RectTransform>().rect.height + marginTop + marginBottom;
+        prefabWidth = LevelButton.GetComponent<RectTransform>().rect.width + marginLeft + marginRight;
+        prefabHeight = LevelButton.GetComponent<RectTransform>().rect.height + marginTop + marginBottom;
         levelsInLine = (int)(mainUnitWidth / prefabWidth);
         levelsInColumn = (int)(mainUnitHeight / prefabHeight);
         menuMarginLeft = (mainUnitWidth - prefabWidth * levelsInLine) / 2;
@@ -70,15 +69,17 @@ public class MainMenu : MonoBehaviour
 
         for (int i = 0; i < levelsAmount; i++)
         {
-            Transform LevelButton;
-            
-            LevelButton = Instantiate(prefab, transform.position + 
+            Transform _levelButton;
+
+            _levelButton = Instantiate(LevelButton, transform.position + 
                 new Vector3(countX * prefabWidth - mainUnitWidth / 2 + prefabWidth / 2 + menuMarginLeft, 
                 countY * prefabHeight - mainUnitHeight / 2 + prefabHeight / 2 + menuMarginTop, 0), Quaternion.identity);
-            LevelButton.transform.SetParent(transform);
+            _levelButton.transform.SetParent(transform);
 
-            LevelButton.GetChild(0).GetComponent<TextMeshProUGUI>().text = (i+1).ToString();
-            LevelButton.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Your score is 000, you are 20th";
+            _levelButton.GetChild(0).GetComponent<TextMeshProUGUI>().text = (i+1).ToString();
+            _levelButton.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Your score is 000, you are 20th";
+
+            _levelButton.GetComponent<Button>().onClick.AddListener(HandleLevelClicked);
 
             countX++;
             if (countX >= levelsInLine)
@@ -87,6 +88,16 @@ public class MainMenu : MonoBehaviour
                 countY--;
             }
             if (countY < 0) return;
+
         }
+
+        
+
+    }
+
+    void HandleLevelClicked()
+    {
+        Debug.Log("Level Button Clicked!");
+        GameManager.Instance.StartLevel();
     }
 }
