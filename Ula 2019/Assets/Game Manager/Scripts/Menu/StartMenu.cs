@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMenu : MonoBehaviour
+public class StartMenu : MonoBehaviour
 {
     [SerializeField] private Animation _mainMenuAnimator;
     [SerializeField] private AnimationClip _fadeOutAnimation;
@@ -28,7 +28,7 @@ public class GameMenu : MonoBehaviour
 
     void HandleGameStateChanged(GameManager.GameState currentState, GameManager.GameState previousState)
     {
-        if(previousState == GameManager.GameState.PREGAME && currentState == GameManager.GameState.RUNNING)
+        if(previousState == GameManager.GameState.PREGAME && currentState == GameManager.GameState.MENU)
         {
             FadeOut();
         }
@@ -41,7 +41,7 @@ public class GameMenu : MonoBehaviour
 
     public void FadeOut()
     {
-        UIManger.Instance.SetDummyCameraActive(false);
+        //UIManger.Instance.SetDummyCameraActive(false);
 
         _mainMenuAnimator.Stop();
         _mainMenuAnimator.clip = _fadeOutAnimation;

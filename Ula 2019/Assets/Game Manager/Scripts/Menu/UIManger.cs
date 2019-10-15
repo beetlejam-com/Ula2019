@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManger : Singleton<UIManger>
 {
-    [SerializeField] private GameMenu _mainMenu;
+    [SerializeField] private StartMenu _startMenu;
     [SerializeField] private PauseMenu _pauseMenu;
 
     [SerializeField] private Camera _dummyCamera;
@@ -13,13 +13,14 @@ public class UIManger : Singleton<UIManger>
 
     private void Start()
     {
-        _mainMenu.OnMainMenuFadeComplete.AddListener(HandleMainMenuFadeComplete);
+        _startMenu.OnMainMenuFadeComplete.AddListener(HandleMainMenuFadeComplete);
         GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
     }
 
     void HandleMainMenuFadeComplete (bool fadeOut)
     {
         OnMainMenuFadeComplete.Invoke(fadeOut);
+        _startMenu.gameObject.SetActive(false);
     }
 
     void HandleGameStateChanged(GameManager.GameState currentState, GameManager.GameState previousState)
